@@ -27,30 +27,32 @@ fun main() = application {
     ) {
         val countState = remember { mutableStateOf(0) }
         val textState = remember { mutableStateOf(TextFieldValue()) }
-        val text = textState.value.text
-        println("======")
+        println("====== Window")
         MaterialTheme {
             Column(Modifier.fillMaxSize().background(Color.Gray),
                 Arrangement.SpaceAround) {
+                println("=== Column")
                 Row {
+                    println("--- Row1")
                     Text("Edit me: ")
                     BasicTextField(textState.value,
                         modifier = Modifier.background(Color.White),
                         onValueChange = { textState.value = it })
                 }
                 Row(horizontalArrangement = Arrangement.spacedBy(5.dp)) {
-                    println("------")
+                    println("--- Row2")
+                    val text = textState.value.text
                     Button(onClick = {
                         countState.value++
                     }) {
+                        println("- Button1")
                         Text(if (countState.value == 0) "Click Me" else "${countState.value} clicks")
-                        println("button with count rendered")
                     }
                     Button(onClick = {
                         countState.value++
                     }) {
+                        println("- Button2")
                         Text(if (countState.value == 0) "Click Me" else text)
-                        println("button with text rendered")
                     }
                 }
             }
